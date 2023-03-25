@@ -1,10 +1,12 @@
 import {Label} from './Filter.styled';
 import {Form } from './Filter.styled';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setFilter } from 'redux/actions';
 
-export const Filter = ({ onSearch }) => {
+export const Filter = () => {
   const value = useSelector(state => state.filter);
+  const dispatch = useDispatch();
 
   return (
     <Form>
@@ -14,13 +16,9 @@ export const Filter = ({ onSearch }) => {
         type="text"
         name="filter"
         value={value}
-        onChange={onSearch}
+        onChange={e => dispatch(setFilter(e.target.value))}
       />
       </Label>
     </Form> 
   );
-}
-
-Filter.propTypes = {
-  onSearch: PropTypes.func.isRequired
 }

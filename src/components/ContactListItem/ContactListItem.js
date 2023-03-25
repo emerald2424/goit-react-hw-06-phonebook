@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { deleteContact } from "redux/actions";
 
 
-export const ContactListItem = ({contact, onDelete}) => {
+export const ContactListItem = ({contact}) => {
   const dispatch = useDispatch();
 
   return (
@@ -23,5 +23,4 @@ ContactListItem.propTypes = {
     id: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired
   }),
-  onDelete: PropTypes.func
 }

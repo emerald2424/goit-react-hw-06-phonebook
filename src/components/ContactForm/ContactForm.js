@@ -1,10 +1,24 @@
 import { nanoid } from 'nanoid';
 import { Form, ErrorMessage } from './ContactForm.styled';
-import PropTypes from 'prop-types';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/actions';
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+
+  const handleSubmit = contact => {
+    const names = contacts.map(contact => contact.name.toLowerCase());
+    if (names.includes(contact.name.toLowerCase())) {
+      return alert(`${contact.name} is already in contacts`);
+    }
+
+    dispatch(addContact(contact));
+  };
+
   const ContactSchema = Yup.object().shape({
     name: Yup.string()
       .matches(
@@ -26,7 +40,7 @@ export const ContactForm = ({ onSubmit }) => {
       initialValues={{ name: '', number: '' }}
       validationSchema={ContactSchema}
       onSubmit={(values, actions) => {
-        onSubmit(
+        handleSubmit(
           {
             ...values,
             id: nanoid(),
@@ -55,6 +69,3 @@ export const ContactForm = ({ onSubmit }) => {
   );
 };
 
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
