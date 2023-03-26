@@ -2,7 +2,7 @@ import {Label} from './Filter.styled';
 import {Form } from './Filter.styled';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setFilter } from 'redux/actions';
+import { setFilter } from 'redux/filterSlice';
 
 export const Filter = () => {
   const value = useSelector(state => state.filter);

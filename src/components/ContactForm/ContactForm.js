@@ -4,7 +4,7 @@ import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/actions';
+import { addContact } from 'redux/contactsSlice';
 
 export const ContactForm = () => {
   const contacts = useSelector(getContacts);
@@ -44,10 +44,9 @@ export const ContactForm = () => {
           {
             ...values,
             id: nanoid(),
-          },
-
-          actions.resetForm()
+          }
         );
+          actions.resetForm()
       }}
     >
       <Form>
