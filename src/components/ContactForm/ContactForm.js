@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
 import { addContact } from 'redux/contactsSlice';
-import localforage from "localforage";
 
 export const ContactForm = () => {
   const contacts = useSelector(getContacts);
@@ -18,8 +17,6 @@ export const ContactForm = () => {
     }
 
     dispatch(addContact(contact));
-    
-    localforage.setItem('contacts', contacts);
   };
 
   const ContactSchema = Yup.object().shape({
